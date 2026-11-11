@@ -17,9 +17,9 @@ export const Route = createFileRoute("/_shell/profile")({
 function Page() {
   return (
     <div className="mx-auto max-w-2xl p-8">
-      <h1 className="font-display text-3xl font-bold">Profile</h1>
+      <h1 className="font-display text-4xl font-extrabold text-gradient">Profile</h1>
       <p className="mt-2 text-muted-foreground">Your learning progress and account details.</p>
-      <div className="mt-6 rounded-2xl border bg-card p-6"><p className="font-display text-xl font-bold">Ishimwe Brian</p><p className="text-sm text-muted-foreground">12 letters learned this week</p></div>
+      <div className="mt-6 glass rounded-2xl p-6"><p className="font-display text-xl font-bold">Ishimwe Brian</p><p className="text-sm text-muted-foreground">12 letters learned this week</p></div>
     </div>
   );
 }

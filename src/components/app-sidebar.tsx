@@ -24,10 +24,10 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarHeader>
         <div className="flex items-center gap-2 px-1 py-2">
-          <div className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground">
+          <div className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-soft">
             <Hand className="h-4 w-4" />
           </div>
-          {!collapsed && <span className="font-display text-xl font-bold">Signa</span>}
+          {!collapsed && <span className="font-display text-xl font-extrabold text-gradient">Signa</span>}
         </div>
       </SidebarHeader>
       <SidebarContent>
@@ -37,7 +37,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.url}>
-                  <SidebarMenuButton asChild isActive={path === item.url} tooltip={item.title} className="h-10 rounded-xl">
+                  <SidebarMenuButton asChild isActive={path === item.url} tooltip={item.title} className="h-10 rounded-xl data-[active=true]:bg-gradient-primary data-[active=true]:text-primary-foreground data-[active=true]:shadow-soft">
                     <Link to={item.url}>
                       <item.icon className="h-4 w-4" />
                       <span>{item.title}</span>
@@ -54,7 +54,7 @@ export function AppSidebar() {
           <PopoverTrigger asChild>
             <button className="flex w-full items-center gap-3 rounded-xl p-1.5 text-left transition-colors hover:bg-sidebar-accent">
               <Avatar className="h-8 w-8">
-                <AvatarFallback className="bg-primary text-primary-foreground text-xs">IB</AvatarFallback>
+                <AvatarFallback className="bg-gradient-primary text-primary-foreground text-xs">IB</AvatarFallback>
               </Avatar>
               {!collapsed && (
                 <div className="min-w-0">
@@ -64,7 +64,7 @@ export function AppSidebar() {
               )}
             </button>
           </PopoverTrigger>
-          <PopoverContent side="right" align="end" className="w-48 rounded-2xl p-1.5">
+          <PopoverContent side="right" align="end" className="w-48 rounded-2xl p-1.5 glass">
             <Link to="/profile" className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm hover:bg-muted">
               <User className="h-4 w-4" /> Profile
             </Link>
