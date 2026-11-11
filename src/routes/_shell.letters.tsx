@@ -29,7 +29,7 @@ const tips: Record<string, string> = {
 
 function Letters() {
   const [i, setI] = useState(0);
-  const l = letters[i];
+  const l = letters[i] ?? "A";
   return (
     <div className="flex h-[calc(100vh-3.5rem)] flex-col gap-6 p-6">
       <section className="relative flex flex-1 items-center justify-center overflow-hidden rounded-[2rem] bg-stage">
