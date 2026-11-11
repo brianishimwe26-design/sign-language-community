@@ -32,22 +32,22 @@ function Letters() {
   const l = letters[i] ?? "A";
   return (
     <div className="flex h-[calc(100vh-3.5rem)] flex-col gap-6 p-6">
-      <section className="relative flex flex-1 items-center justify-center overflow-hidden rounded-[2rem] bg-stage">
-        <span className="pointer-events-none absolute font-display text-[18rem] font-bold leading-none text-primary/10">{l}</span>
+      <section className="relative flex flex-1 items-center justify-center overflow-hidden rounded-[2rem] border border-border bg-stage">
+        <span className="pointer-events-none absolute font-display text-[18rem] font-bold leading-none text-gradient opacity-25">{l}</span>
         <img key={l} src={hand} alt={`Hand sign for ${l}`} width={640} height={1280}
-          className="relative h-[80%] w-auto animate-in fade-in zoom-in-95 duration-300"
+          className="relative h-[80%] w-auto drop-shadow-[0_0_25px_var(--primary)] brightness-150 animate-in fade-in zoom-in-95 duration-300"
           style={{ transform: `rotate(${(i % 7) * 8 - 24}deg) scaleX(${i % 2 ? -1 : 1})` }} />
-        <div className="absolute bottom-5 left-5 max-w-xs rounded-2xl bg-card/85 p-4 backdrop-blur">
+        <div className="absolute bottom-5 left-5 max-w-xs glass rounded-2xl p-4">
           <p className="font-display text-2xl font-bold">Letter {l}</p>
           <p className="text-sm text-muted-foreground">{tips[l] ?? "Watch the hand shape and copy it slowly."}</p>
         </div>
       </section>
-      <div className="flex items-center gap-2 rounded-full border bg-card p-2 shadow-soft">
+      <div className="flex items-center gap-2 glass rounded-full p-2 shadow-soft">
         <button onClick={() => setI((v) => Math.max(0, v - 1))} aria-label="Previous" className="grid h-10 w-10 shrink-0 place-items-center rounded-full hover:bg-muted"><ChevronLeft className="h-4 w-4" /></button>
         <div className="no-scrollbar flex flex-1 gap-1.5 overflow-x-auto scroll-smooth">
           {letters.map((x, idx) => (
             <button key={x} onClick={() => setI(idx)}
-              className={cn("h-11 min-w-11 shrink-0 rounded-full font-display text-lg font-bold transition", idx === i ? "scale-110 bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground")}>
+              className={cn("h-11 min-w-11 shrink-0 rounded-full font-display text-lg font-bold transition", idx === i ? "scale-110 bg-gradient-primary text-primary-foreground shadow-soft" : "text-muted-foreground hover:bg-muted hover:text-foreground")}>
               {x}
             </button>
           ))}

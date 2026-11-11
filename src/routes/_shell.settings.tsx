@@ -17,9 +17,9 @@ export const Route = createFileRoute("/_shell/settings")({
 function Page() {
   return (
     <div className="mx-auto max-w-2xl p-8">
-      <h1 className="font-display text-3xl font-bold">Settings</h1>
+      <h1 className="font-display text-4xl font-extrabold text-gradient">Settings</h1>
       <p className="mt-2 text-muted-foreground">Adjust signing speed, voice and appearance.</p>
-      <div className="mt-6 divide-y rounded-2xl border bg-card">{["Signing speed","Voice recognition","Show captions"].map((s) => (<label key={s} className="flex items-center justify-between p-5 text-sm">{s}<input type="checkbox" defaultChecked className="h-5 w-5 accent-primary" /></label>))}</div>
+      <div className="mt-6 divide-y glass rounded-2xl">{["Signing speed","Voice recognition","Show captions"].map((s) => (<label key={s} className="flex items-center justify-between p-5 text-sm">{s}<input type="checkbox" defaultChecked className="h-5 w-5 accent-primary" /></label>))}</div>
     </div>
   );
 }
