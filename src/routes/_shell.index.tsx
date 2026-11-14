@@ -18,8 +18,6 @@ export const Route = createFileRoute("/_shell/")({
   component: Chat,
 });
 
-const suggestions = ["Hello", "Thank you", "How are you?", "My name is", "Please", "Sorry"];
-
 function Chat() {
   const [messages, setMessages] = useState<{ text: string; from: "you" | "ai" }[]>([
     { text: "Hi! Type or say something and I'll sign it for you.", from: "ai" },
@@ -33,31 +31,32 @@ function Chat() {
     setText("");
   };
 
+  const lastRequest = [...messages].reverse().find((m) => m.from === "you");
+
   return (
-    <div className="grid h-[calc(100vh-3.5rem)] grid-cols-1 gap-6 p-6 pb-28 md:grid-cols-[1fr_1.1fr]">
+    <div className="grid h-[calc(100vh-3.5rem)] grid-cols-1 gap-6 p-6 pb-28 md:grid-cols-2">
       <section className="flex min-h-0 flex-col gap-4">
-        <div>
-          <h1 className="font-display text-4xl font-extrabold leading-tight">What would you like to <span className="text-gradient">say?</span></h1>
-          <p className="mt-1 text-sm text-muted-foreground">Pick a word or start typing below.</p>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {suggestions.map((s) => (
-            <button key={s} onClick={() => send(s)} className="glass rounded-full px-4 py-1.5 text-sm transition hover:-translate-y-0.5 hover:border-primary/60 hover:text-primary hover:shadow-soft">
-              {s}
-            </button>
-          ))}
+        <div
+          key={lastRequest?.text ?? "empty"}
+          className="animate-in fade-in slide-in-from-bottom-3 duration-500 glass relative rounded-3xl rounded-bl-md p-6 shadow-soft"
+        >
+          <span className="mb-2 flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-primary">
+            <Volume2 className="h-3.5 w-3.5" /> Interpreting
+          </span>
+          <p className="font-display text-2xl font-bold leading-snug md:text-3xl">
+            {lastRequest ? lastRequest.text : "Your words will appear here…"}
+          </p>
         </div>
         <div className="no-scrollbar flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto">
           {messages.map((m, i) => (
             <div key={i} className={cn("max-w-[85%] animate-in fade-in slide-in-from-bottom-2 duration-500 rounded-3xl px-5 py-3 text-sm", m.from === "you" ? "self-end rounded-br-md bg-gradient-primary text-primary-foreground shadow-soft" : "glass self-start rounded-bl-md")}>
-              {m.from === "ai" && <Volume2 className="mb-1 h-3.5 w-3.5 text-primary" />}
               {m.text}
             </div>
           ))}
         </div>
       </section>
-      <section className="relative hidden overflow-hidden rounded-[2rem] border border-border bg-stage md:flex md:items-end md:justify-center">
-        <img src={avatar} alt="AI sign language companion" width={896} height={1152} className="animate-floaty h-[92%] w-auto rounded-[1.5rem] object-contain [mask-image:radial-gradient(ellipse_at_center,black_55%,transparent_75%)]" />
+      <section className="relative hidden md:flex md:items-end md:justify-center">
+        <img src={avatar} alt="AI sign language companion" width={896} height={1152} className="animate-floaty h-full max-h-full w-auto object-contain drop-shadow-[0_0_60px_color-mix(in_oklab,var(--primary)_35%,transparent)]" />
         <span className="absolute left-5 top-5 flex items-center gap-2 glass rounded-full px-3 py-1 text-xs font-medium backdrop-blur">
           <span className="h-2 w-2 animate-pulse rounded-full bg-primary" /> Ready to sign
         </span>
