@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Mic, Send, Volume2 } from "lucide-react";
-import avatar from "@/assets/ai-avatar.jpg";
+import avatar from "@/assets/ai-avatar.png";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_shell/")({
