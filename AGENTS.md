@@ -30,3 +30,4 @@ use the editor.
 <!-- LOVABLE:END -->
 
 - Letter-specific hand photos use CDN asset pointers mapped by letter; do not rotate a shared illustration to represent different signs.
+- Keep alphabet navigation native horizontally scrollable and center the selected letter within its own strip, so touch scrolling works without moving the page.
