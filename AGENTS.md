@@ -31,3 +31,6 @@ use the editor.
 
 - Letter-specific hand photos use CDN asset pointers mapped by letter; do not rotate a shared illustration to represent different signs.
 - Keep alphabet navigation native horizontally scrollable and center the selected letter within its own strip, so touch scrolling works without moving the page.
+- Keep one root AccountProvider subscription and owner-scoped profile queries; this prevents stale identities when accounts change.
+- Keep learning pages public with guest identity; account details derive only from the authenticated session and its profile.
+- Store display names and avatar URLs in owner-only profiles created by an Auth lifecycle trigger, so each email account retains its own identity.

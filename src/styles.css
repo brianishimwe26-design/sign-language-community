@@ -83,20 +83,20 @@
   --card-foreground: oklch(0.96 0.01 280);
   --popover: oklch(0.22 0.03 280);
   --popover-foreground: oklch(0.96 0.01 280);
-  --primary: oklch(0.78 0.16 195);
+  --primary: oklch(0.76 0.14 225);
   --primary-foreground: oklch(0.16 0.03 280);
-  --primary-glow: oklch(0.72 0.2 330);
+  --primary-glow: oklch(0.65 0.2 265);
   --secondary: oklch(0.27 0.04 280);
   --secondary-foreground: oklch(0.96 0.01 280);
   --muted: oklch(0.26 0.03 280 / 70%);
   --muted-foreground: oklch(0.72 0.03 280);
-  --accent: oklch(0.32 0.06 290);
+  --accent: oklch(0.32 0.06 250);
   --accent-foreground: oklch(0.96 0.01 280);
   --destructive: oklch(0.68 0.2 20);
   --destructive-foreground: oklch(0.98 0 0);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.78 0.16 195);
+  --ring: oklch(0.76 0.14 225);
   --chart-1: oklch(0.78 0.16 195);
   --chart-2: oklch(0.72 0.2 330);
   --chart-3: oklch(0.8 0.15 85);
@@ -104,12 +104,12 @@
   --chart-5: oklch(0.65 0.2 270);
   --sidebar: oklch(0.18 0.03 280 / 60%);
   --sidebar-foreground: oklch(0.92 0.01 280);
-  --sidebar-primary: oklch(0.78 0.16 195);
+  --sidebar-primary: oklch(0.76 0.14 225);
   --sidebar-primary-foreground: oklch(0.16 0.03 280);
   --sidebar-accent: oklch(1 0 0 / 8%);
   --sidebar-accent-foreground: oklch(0.98 0 0);
   --sidebar-border: oklch(1 0 0 / 8%);
-  --sidebar-ring: oklch(0.78 0.16 195);
+  --sidebar-ring: oklch(0.76 0.14 225);
   --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-glow));
   --shadow-soft: 0 25px 60px -20px color-mix(in oklab, var(--primary-glow) 45%, transparent), inset 0 1px 0 oklch(1 0 0 / 8%);
   --gradient-stage: radial-gradient(circle at 30% 20%, color-mix(in oklab, var(--primary) 30%, transparent), transparent 55%), radial-gradient(circle at 75% 80%, color-mix(in oklab, var(--primary-glow) 30%, transparent), transparent 55%), oklch(0.2 0.03 280 / 60%);
@@ -138,3 +138,6 @@
 @utility animate-drift { animation: drift 18s ease-in-out infinite; }
 @utility animate-floaty { animation: floaty 6s ease-in-out infinite; }
 @layer base { html { color-scheme: dark; } button, a { transition-timing-function: cubic-bezier(.22,1,.36,1); transition-duration: 300ms; } }
+
+.google-sign-in { background: oklch(0.19 0.003 280); border-color: oklch(0.64 0.005 280); color: oklch(0.91 0.003 280); }
+@media (prefers-reduced-motion: reduce) { .animate-drift, .animate-floaty { animation: none; } }
