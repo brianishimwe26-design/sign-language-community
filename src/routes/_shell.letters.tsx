@@ -60,7 +60,7 @@ export function Letters() {
       </section>
       <div className="flex min-w-0 items-center gap-2 glass rounded-full p-2 shadow-soft">
         <Button variant="ghost" size="icon" disabled={i === 0} onClick={() => setI((v) => Math.max(0, v - 1))} aria-label="Previous" className="grid h-10 w-10 shrink-0 place-items-center rounded-full hover:bg-muted"><ChevronLeft className="h-4 w-4" /></Button>
-        <div ref={carouselRef} role="group" aria-label="Alphabet" className="no-scrollbar relative flex min-w-0 flex-1 touch-pan-x gap-1.5 overflow-x-auto overscroll-x-contain py-2">
+        <div ref={carouselRef} role="group" aria-label="Alphabet" className="no-scrollbar relative flex min-w-0 flex-1 touch-pan-x gap-1.5 overflow-x-auto overscroll-x-contain px-1 py-2">
           {letters.map((x, idx) => (
             <Button variant="ghost" size="icon" key={x} onClick={() => setI(idx)} aria-pressed={idx === i}
               className={cn("h-11 min-w-11 shrink-0 rounded-full font-display text-lg font-bold transition", idx === i ? "scale-110 bg-gradient-primary text-primary-foreground shadow-soft" : "text-muted-foreground hover:bg-muted hover:text-foreground")}>
