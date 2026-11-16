@@ -13,7 +13,7 @@ describe("Alphabet navigation", () => {
     Object.defineProperty(HTMLElement.prototype, "scrollTo", { configurable: true, value: scrollTo });
     render(<Letters />);
     const strip = screen.getByRole("group", { name: "Alphabet" });
-    const p = screen.getByRole("button", { name: "P", exact: true });
+    const p = screen.getByRole("button", { name: /^P$/ });
     Object.defineProperty(strip, "clientWidth", { configurable: true, value: 250 });
     Object.defineProperty(p, "offsetLeft", { configurable: true, value: 750 });
     Object.defineProperty(p, "offsetWidth", { configurable: true, value: 44 });
@@ -21,6 +21,6 @@ describe("Alphabet navigation", () => {
     expect(p).toHaveAttribute("aria-pressed", "true");
     expect(scrollTo).toHaveBeenLastCalledWith({ left: 647, behavior: "smooth" });
     fireEvent.click(screen.getByRole("button", { name: "Previous" }));
-    expect(screen.getByRole("button", { name: "O", exact: true })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name: /^O$/ })).toHaveAttribute("aria-pressed", "true");
   });
 });
