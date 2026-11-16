@@ -5,7 +5,11 @@ import {
   SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar,
 } from "@/components/ui/sidebar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from '@/components/ui/button';
+import { useAccount } from '@/components/account-provider';
+import { supabase } from '@/integrations/supabase/client';
+import { useQueryClient } from '@tanstack/react-query';
 
 const items = [
   { title: "Chat", url: "/", icon: MessageCircle },
@@ -19,6 +23,15 @@ export function AppSidebar() {
   const collapsed = state === "collapsed";
   const path = useRouterState({ select: (r) => r.location.pathname });
   const navigate = useNavigate();
+  const account = useAccount();
+  const queryClient = useQueryClient();
+  const signOut = async () => {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    const { error } = await supabase.auth.signOut();
+    if (error) return;
+    await navigate({ to: '/login', replace: true });
+  };
 
   return (
     <Sidebar collapsible="icon">
@@ -52,25 +65,26 @@ export function AppSidebar() {
       <SidebarFooter>
         <Popover>
           <PopoverTrigger asChild>
-            <button className="flex w-full items-center gap-3 rounded-xl p-1.5 text-left transition-colors hover:bg-sidebar-accent">
+            <Button variant="ghost" className="h-auto w-full justify-start gap-3 rounded-xl p-1.5 text-left" aria-label="Account menu">
               <Avatar className="h-8 w-8">
-                <AvatarFallback className="bg-gradient-primary text-primary-foreground text-xs">IB</AvatarFallback>
+                {account.avatarUrl && <AvatarImage src={account.avatarUrl} alt={account.name} />}
+                <AvatarFallback className="bg-gradient-primary text-primary-foreground text-xs">{account.initials}</AvatarFallback>
               </Avatar>
               {!collapsed && (
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold">Ishimwe Brian</p>
-                  <p className="truncate text-xs text-muted-foreground">Learner</p>
+                   <p className="truncate text-sm font-semibold">{account.loading ? 'Loading…' : account.name}</p>
+                   <p className="truncate text-xs text-muted-foreground">{account.user?.email ?? 'Not signed in'}</p>
                 </div>
               )}
-            </button>
+            </Button>
           </PopoverTrigger>
           <PopoverContent side="right" align="end" className="w-48 rounded-2xl p-1.5 glass">
             <Link to="/profile" className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm hover:bg-muted">
               <User className="h-4 w-4" /> Profile
             </Link>
-            <button onClick={() => navigate({ to: "/login" })} className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-destructive hover:bg-muted">
-              <LogOut className="h-4 w-4" /> Log Out
-            </button>
+            <Button variant="ghost" onClick={() => account.user ? void signOut() : void navigate({ to: '/login' })} className="w-full justify-start rounded-lg px-3 text-destructive">
+              <LogOut className="h-4 w-4" /> {account.user ? 'Log Out' : 'Log in'}
+            </Button>
           </PopoverContent>
         </Popover>
       </SidebarFooter>
