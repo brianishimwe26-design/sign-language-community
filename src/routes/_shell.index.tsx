@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Mic, Send, Volume2 } from "lucide-react";
-import avatar from "@/assets/ai-avatar.png";
+import avatar from "@/assets/signa-character.png.asset.json";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
@@ -46,7 +46,7 @@ function Chat() {
         </div>
       </section>
       <section className="relative hidden md:flex md:items-end md:justify-center">
-        <img src={avatar} alt="AI sign language companion" width={896} height={1152} className="animate-floaty h-full max-h-full w-auto object-contain drop-shadow-[0_0_60px_color-mix(in_oklab,var(--primary)_35%,transparent)]" />
+        <img src={avatar.url} alt="AI sign language companion" width={1145} height={1374} className="animate-floaty h-full max-h-full w-auto max-w-full object-contain drop-shadow-[0_0_60px_color-mix(in_oklab,var(--primary)_35%,transparent)]" />
       </section>
       <form onSubmit={(e) => { e.preventDefault(); send(); }} className="absolute inset-x-6 bottom-6 mx-auto flex max-w-3xl items-center gap-2 glass rounded-full p-2 shadow-soft">
         <Button variant="ghost" size="icon" type="button" onClick={() => setListening((l) => !l)} aria-label="Voice input" className={cn("grid h-11 w-11 shrink-0 place-items-center rounded-full transition", listening ? "animate-pulse bg-gradient-primary text-primary-foreground ring-4 ring-primary/30" : "bg-muted hover:bg-accent")}>
