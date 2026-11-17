@@ -31,7 +31,7 @@ function Chat() {
   };
 
   return (
-    <div className="grid h-[calc(100vh-3.5rem)] grid-cols-1 gap-6 p-6 pb-28 md:grid-cols-2">
+    <div className="grid h-[calc(100dvh-3.5rem)] grid-cols-1 grid-rows-[auto_minmax(0,1fr)] gap-6 p-6 pb-28 md:grid-cols-2 md:grid-rows-1">
       <section className="flex min-h-0 flex-col gap-4">
         <div
           key={lastRequest || "empty"}
@@ -45,7 +45,7 @@ function Chat() {
           </p>
         </div>
       </section>
-      <section className="relative hidden md:flex md:items-end md:justify-center">
+      <section className="relative flex min-h-0 items-end justify-center">
         <img src={avatar.url} alt="AI sign language companion" width={1145} height={1374} className="animate-floaty h-full max-h-full w-auto max-w-full object-contain drop-shadow-[0_0_60px_color-mix(in_oklab,var(--primary)_35%,transparent)]" />
       </section>
       <form onSubmit={(e) => { e.preventDefault(); send(); }} className="absolute inset-x-6 bottom-6 mx-auto flex max-w-3xl items-center gap-2 glass rounded-full p-2 shadow-soft">
