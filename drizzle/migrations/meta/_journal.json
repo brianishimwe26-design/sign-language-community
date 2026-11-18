@@ -8,6 +8,13 @@
       "when": 1794841255373,
       "tag": "0000_create_user_profiles",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1795011355904,
+      "tag": "0001_sign_video_jobs",
+      "breakpoints": true
     }
   ]
 }

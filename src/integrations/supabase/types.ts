@@ -35,6 +35,63 @@ export type Database = {
         }
         Relationships: []
       }
+      sign_video_jobs: {
+        Row: {
+          character_path: string | null
+          clip_path: string | null
+          created_at: string
+          end_seconds: number | null
+          error: string | null
+          id: string
+          language: string
+          lease_until: string | null
+          output_path: string | null
+          phrase: string
+          prediction_id: string | null
+          source_url: string | null
+          sources: Json
+          start_seconds: number | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          character_path?: string | null
+          clip_path?: string | null
+          created_at?: string
+          end_seconds?: number | null
+          error?: string | null
+          id?: string
+          language: string
+          lease_until?: string | null
+          output_path?: string | null
+          phrase: string
+          prediction_id?: string | null
+          source_url?: string | null
+          sources?: Json
+          start_seconds?: number | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          character_path?: string | null
+          clip_path?: string | null
+          created_at?: string
+          end_seconds?: number | null
+          error?: string | null
+          id?: string
+          language?: string
+          lease_until?: string | null
+          output_path?: string | null
+          phrase?: string
+          prediction_id?: string | null
+          source_url?: string | null
+          sources?: Json
+          start_seconds?: number | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
