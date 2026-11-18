@@ -4,6 +4,7 @@ import { Mic, Send, Volume2 } from "lucide-react";
 import avatar from "@/assets/signa-character.png.asset.json";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { SignVideoPanel } from '@/components/sign-video-panel';
 
 export const Route = createFileRoute("/_shell/")({
   head: () => ({
@@ -23,16 +24,18 @@ function Chat() {
   const [lastRequest, setLastRequest] = useState("");
   const [text, setText] = useState("");
   const [listening, setListening] = useState(false);
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
 
   const send = (t = text) => {
     if (!t.trim()) return;
     setLastRequest(t.trim());
+    setVideoUrl(null);
     setText("");
   };
 
   return (
     <div className="grid h-[calc(100dvh-3.5rem)] grid-cols-1 grid-rows-[auto_minmax(0,1fr)] gap-6 p-6 pb-28 md:grid-cols-2 md:grid-rows-1">
-      <section className="flex min-h-0 flex-col gap-4">
+      <section className="flex min-h-0 flex-col gap-4 overflow-y-auto">
         <div
           key={lastRequest || "empty"}
           className="animate-in fade-in slide-in-from-bottom-3 duration-500 glass relative rounded-3xl rounded-bl-md p-6 shadow-soft"
@@ -44,9 +47,10 @@ function Chat() {
             {lastRequest || "Your words will appear here…"}
           </p>
         </div>
+        {lastRequest && <SignVideoPanel key={lastRequest} phrase={lastRequest} onVideo={setVideoUrl} />}
       </section>
       <section className="relative flex min-h-0 items-end justify-center">
-        <img src={avatar.url} alt="AI sign language companion" width={1145} height={1374} className="animate-floaty h-full max-h-full w-auto max-w-full object-contain drop-shadow-[0_0_60px_color-mix(in_oklab,var(--primary)_35%,transparent)]" />
+        {videoUrl ? <video src={videoUrl} controls autoPlay loop playsInline className="h-full max-h-full w-full object-contain" aria-label="Generated sign animation" /> : <img src={avatar.url} alt="AI sign language companion" width={1145} height={1374} className="animate-floaty h-full max-h-full w-auto max-w-full object-contain drop-shadow-[0_0_60px_color-mix(in_oklab,var(--primary)_35%,transparent)]" />}
       </section>
       <form onSubmit={(e) => { e.preventDefault(); send(); }} className="absolute inset-x-6 bottom-6 mx-auto flex max-w-3xl items-center gap-2 glass rounded-full p-2 shadow-soft">
         <Button variant="ghost" size="icon" type="button" onClick={() => setListening((l) => !l)} aria-label="Voice input" className={cn("grid h-11 w-11 shrink-0 place-items-center rounded-full transition", listening ? "animate-pulse bg-gradient-primary text-primary-foreground ring-4 ring-primary/30" : "bg-muted hover:bg-accent")}>

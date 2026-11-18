@@ -34,3 +34,6 @@ use the editor.
 - Keep one root AccountProvider subscription and owner-scoped profile queries; this prevents stale identities when accounts change.
 - Keep learning pages public with guest identity; account details derive only from the authenticated session and its profile.
 - Store display names and avatar URLs in owner-only profiles created by an Auth lifecycle trigger, so each email account retains its own identity.
+- Sign-video operations use authenticated server functions, private owner-scoped media, and persisted stage claims; this prevents duplicate paid generations and cross-account access.
+- E2B control-plane calls use the connector gateway and sandbox commands use scoped envd tokens; provider credentials never reach sandbox commands or the browser.
+- Sign-language preferences live in one shared browser provider and parameterize each search; regional sign languages are never treated as interchangeable.
