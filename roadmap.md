@@ -1,6 +1,6 @@
 # Requested screen updates
 - [ ] Connect Firecrawl, E2B, and Replicate for the sign-video pipeline.
-- [ ] Add a sign-language choice in Settings and use it in video searches.
+- [x] Add a sign-language choice in Settings and use it in video searches.
 - [ ] Verify the search, trimming, and animation journey with real input.
 - [x] Keep only the upper request bubble in chat.
 - [x] Remove the status words beside the character.

@@ -7,6 +7,7 @@ import handB from "@/assets/letter-b.asset.json";
 import handC from "@/assets/letter-c.asset.json";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useSignLanguage } from "@/components/sign-language-provider";
 
 export const Route = createFileRoute("/_shell/letters")({
   head: () => ({
@@ -33,6 +34,7 @@ const tips: Record<string, string> = {
 };
 
 export function Letters() {
+  const { language } = useSignLanguage();
   const [i, setI] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const l = letters[i] ?? "A";
@@ -55,6 +57,7 @@ export function Letters() {
           className="relative h-[80%] max-w-[80%] w-auto object-contain animate-in fade-in zoom-in-95 duration-300" />
         <div className="absolute bottom-5 left-5 max-w-xs glass rounded-2xl p-4">
           <p className="font-display text-2xl font-bold">Letter {l}</p>
+          <p className="text-xs text-muted-foreground">{language}</p>
           <p className="text-sm text-muted-foreground">{tips[l] ?? "Watch the hand shape and copy it slowly."}</p>
         </div>
       </section>
