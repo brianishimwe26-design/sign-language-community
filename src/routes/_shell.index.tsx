@@ -47,7 +47,7 @@ function Chat() {
             {lastRequest || "Your words will appear here…"}
           </p>
         </div>
-        {lastRequest && <SignVideoPanel key={lastRequest} phrase={lastRequest} onVideo={setVideoUrl} />}
+        {lastRequest && <SignVideoPanel key={`panel-${lastRequest}`} phrase={lastRequest} onVideo={setVideoUrl} />}
       </section>
       <section className="relative flex min-h-0 items-end justify-center">
         {videoUrl ? <video src={videoUrl} controls autoPlay loop playsInline className="h-full max-h-full w-full object-contain" aria-label="Generated sign animation" /> : <img src={avatar.url} alt="AI sign language companion" width={1145} height={1374} className="animate-floaty h-full max-h-full w-auto max-w-full object-contain drop-shadow-[0_0_60px_color-mix(in_oklab,var(--primary)_35%,transparent)]" />}
