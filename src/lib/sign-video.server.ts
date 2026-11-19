@@ -36,7 +36,7 @@ export async function trimVideo(sourceUrl: string, start: number, end: number, j
   const sandboxInfo = z.object({ sandboxID: z.string(), envdVersion: z.string(), envdAccessToken: z.string(), domain: z.string().nullish() }).parse(await response.json());
   // The control plane is gateway-backed; envd uses the sandbox's scoped token, never the provider key.
   const sandbox = new Sandbox({ sandboxId: sandboxInfo.sandboxID, envdVersion: sandboxInfo.envdVersion,
-    envdAccessToken: sandboxInfo.envdAccessToken, sandboxDomain: sandboxInfo.domain ?? undefined,
+    envdAccessToken: sandboxInfo.envdAccessToken, ...(sandboxInfo.domain ? { sandboxDomain: sandboxInfo.domain } : {}),
     apiKey: 'sandbox-session', validateApiKey: false, retries: 0 });
   try {
     await sandbox.files.write('/home/user/trim.json', JSON.stringify({ url: sourceUrl, start, end }));
