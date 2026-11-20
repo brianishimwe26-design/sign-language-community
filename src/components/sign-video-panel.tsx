@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useServerFn } from '@tanstack/react-start';
 import { ExternalLink, Film, Loader2, WandSparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -52,11 +52,25 @@ export function SignVideoPanel({ phrase, onVideo }: { phrase: string; onVideo: (
     }).catch((error: unknown) => { setStatus('paused'); setError(error instanceof Error ? error.message : 'Could not check animation.'); });
   }, [tick]);
 
-  async function find() {
+  // Interpretation starts as soon as a phrase is submitted — no extra click needed.
+  const searched = useRef('');
+  const userId = user?.id;
+  useEffect(() => {
+    if (!userId) return;
+    const key = `${userId}|${phrase}|${language}`;
+    if (searched.current === key) return;
+    searched.current = key;
     setError(''); setStatus('searching'); onVideo(null); setSources([]); setId(null);
-    try { const result = await search({ data: { phrase, language } }); setId(result.id); setSources(result.sources); setStatus('awaiting_clip'); }
-    catch (error) { setStatus('paused'); setError(error instanceof Error ? error.message : 'Search failed.'); }
-  }
+    void search({ data: { phrase, language } })
+      .then((result) => {
+        if (searched.current !== key) return;
+        setId(result.id); setSources(result.sources); setStatus('awaiting_clip');
+      })
+      .catch((error: unknown) => {
+        if (searched.current !== key) return;
+        setStatus('paused'); setError(error instanceof Error ? error.message : 'Search failed.');
+      });
+  }, [userId, phrase, language, search, onVideo]);
   async function cut() {
     if (!id || !user || !file || !rights) return;
     setError(''); setStatus('trimming');
@@ -80,7 +94,6 @@ export function SignVideoPanel({ phrase, onVideo }: { phrase: string; onVideo: (
     } catch (error) { setStatus('paused'); setError(error instanceof Error ? error.message : 'Animation failed.'); }
   }
   return <div className="space-y-4 text-sm">
-    <div className="flex flex-wrap items-center justify-between gap-2"><span className="text-muted-foreground">{language}</span><Button onClick={find} disabled={!user || busy || !phrase}><Film className="h-4 w-4" />Find sign video</Button></div>
     {!user && <a href="/login" className="text-primary underline">Sign in to find and animate videos</a>}
     {busy && <p role="status" className="flex items-center gap-2 text-primary"><Loader2 className="h-4 w-4 animate-spin" />{status === 'searching' ? 'Finding references…' : status === 'trimming' ? 'Trimming the clip…' : 'Animating your character…'}</p>}
     {error && <p role="alert" className="text-destructive">{error}</p>}

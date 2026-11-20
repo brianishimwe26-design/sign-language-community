@@ -1,8 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import hand from "@/assets/hand-line.png";
+import hands from "@/assets/signa-hands.png";
 import { cn } from "@/lib/utils";
-import { Aurora } from "@/components/aurora";
 import { Button } from '@/components/ui/button';
 import { PasswordInput } from '@/components/password-input';
 import { supabase } from '@/integrations/supabase/client';
@@ -58,9 +57,7 @@ function Login() {
   const field = "w-full rounded-xl border bg-input/40 px-4 py-3 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-ring/30";
   return (
     <div className="relative flex min-h-screen items-center justify-center isolate overflow-hidden px-4">
-      <Aurora />
-      <img src={hand} alt="" aria-hidden width={640} height={1280} className="pointer-events-none absolute left-[calc(50%-25rem)] top-1/2 hidden h-[85vh] w-auto -translate-x-1/2 -translate-y-1/2 -rotate-12 animate-floaty opacity-90 brightness-150 drop-shadow-[0_0_30px_var(--primary-glow)] md:block" />
-      <img src={hand} alt="" aria-hidden width={640} height={1280} className="pointer-events-none absolute left-[calc(50%+25rem)] top-1/2 hidden h-[85vh] w-auto -translate-x-1/2 -translate-y-1/2 rotate-12 -scale-x-100 animate-floaty opacity-90 brightness-150 drop-shadow-[0_0_30px_var(--primary-glow)] md:block" />
+      <img src={hands} alt="" aria-hidden width={712} height={495} className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover" />
       <div className="relative w-full max-w-sm glass rounded-[2rem] p-8 shadow-soft">
         <h1 className="font-display text-3xl font-extrabold">{mode === "login" ? <>Welcome <span className="text-gradient">back</span></> : <>Join <span className="text-gradient">Signa</span></>}</h1>
         <p className="mt-1 text-sm text-muted-foreground">Learn to speak with your hands.</p>

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Mic, Send, Volume2 } from "lucide-react";
+import { Mic, Send } from "lucide-react";
 import avatar from "@/assets/signa-character.png.asset.json";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -36,17 +36,14 @@ function Chat() {
   return (
     <div className="grid h-[calc(100dvh-3.5rem)] grid-cols-1 grid-rows-[auto_minmax(0,1fr)] gap-6 p-6 pb-28 md:grid-cols-2 md:grid-rows-1">
       <section className="flex min-h-0 flex-col gap-4 overflow-y-auto">
-        <div
-          key={lastRequest || "empty"}
-          className="animate-in fade-in slide-in-from-bottom-3 duration-500 glass relative rounded-3xl rounded-bl-md p-6 shadow-soft"
-        >
-          <span className="mb-2 flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-primary">
-            <Volume2 className="h-3.5 w-3.5" /> Interpreting
-          </span>
-          <p className="font-display text-2xl font-bold leading-snug md:text-3xl">
-            {lastRequest || "Your words will appear here…"}
-          </p>
-        </div>
+        {lastRequest && (
+          <div
+            key={lastRequest}
+            className="animate-in fade-in slide-in-from-bottom-3 duration-500 glass relative rounded-3xl rounded-bl-md p-6 shadow-soft"
+          >
+            <p className="font-display text-2xl font-bold leading-snug md:text-3xl">{lastRequest}</p>
+          </div>
+        )}
         {lastRequest && <SignVideoPanel key={`panel-${lastRequest}`} phrase={lastRequest} onVideo={setVideoUrl} />}
       </section>
       <section className="relative flex min-h-0 items-end justify-center">
