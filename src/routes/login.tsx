@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import hands from "@/assets/signa-hands.png";
 import { cn } from "@/lib/utils";
+import { LoginBackdrop } from "@/components/login-backdrop";
 import { Button } from '@/components/ui/button';
 import { PasswordInput } from '@/components/password-input';
 import { supabase } from '@/integrations/supabase/client';
@@ -57,7 +57,7 @@ function Login() {
   const field = "w-full rounded-xl border bg-input/40 px-4 py-3 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-ring/30";
   return (
     <div className="relative flex min-h-screen items-center justify-center isolate overflow-hidden px-4">
-      <img src={hands} alt="" aria-hidden width={712} height={495} className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover" />
+      <LoginBackdrop />
       <div className="relative w-full max-w-sm glass rounded-[2rem] p-8 shadow-soft">
         <h1 className="font-display text-3xl font-extrabold">{mode === "login" ? <>Welcome <span className="text-gradient">back</span></> : <>Join <span className="text-gradient">Signa</span></>}</h1>
         <p className="mt-1 text-sm text-muted-foreground">Learn to speak with your hands.</p>
